@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pvpg
+  name: pgpv
 spec:
   capacity:
     storage: 5Gi
@@ -11,4 +11,4 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: pg
   hostPath:
-    path: "/home/arman/dbk8/pgadmin/dbstorage"
+    path: "/home/arman/dbk8/mongo/db"

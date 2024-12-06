@@ -22,7 +22,7 @@ spec:
     matchLabels:
       app: mongo
   serviceName: mongo-service
-  replicas: 1
+  replicas: 3
   minReadySeconds: 10 # by default is 0
   template:
     metadata:
@@ -47,12 +47,7 @@ spec:
         volumeMounts:
         - name: mongopath
           mountPath: /etc/mongo
-  volumeClaimTemplates:
-  - metadata:
-      name: mongopath
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "pg"
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+        - name: mongopath
+          persistentVolumeClaim:
+            claimName: pgpvc

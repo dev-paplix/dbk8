@@ -23,12 +23,16 @@ spec:
       labels:
         app: postgres
     spec:
+      volumes:
+        - name: pg
+          persistentVolumeClaim:
+            claimName: pgpvc
       containers:
       - name: postgres
         image: postgres:12.19
-  #      volumeMounts:
-#        - mountPath: "/var/lib/postgresql/data"
- #         name: pg
+        volumeMounts:
+        - mountPath: "/var/lib/postgresql/data"
+          name: pg
         env:
           - name: POSTGRES_USER
             valueFrom:
@@ -47,10 +51,7 @@ spec:
               configMapKeyRef:
                 name: pgadmin-config
                 key: POSTGRES_DB
-#        volumes:
- #         - name: pg
-  #          persistentVolumeClaim:
-   #           claimName: pgpvc
+
         ports:
         - containerPort: 5432
 
